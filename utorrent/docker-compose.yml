@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  nordvpn:
+      image: bubuntux/nordvpn
+      devices:
+        - /dev/net/tun
+      container_name: vpn
+      cap_add:
+        - net_admin
+      security_opt:
+        - label:disable
+      volumes:
+        - /dev/net:/dev/net:z
+      environment:
+        - USER=
+        - PASS=
+        - COUNRTY=US
+        - CATEGORY=P2P
+        - PROTOCOL=openvpn_tcp
+
+  utorrent:
+    container_name: utorrent
+    build: .
+    volumes:
+      - $PWD/data:/utorrent/data
+      - $PWD/settings:/utorrent/settings
+    ports:
+      - '8080:8080'
+      - '6881:6881'

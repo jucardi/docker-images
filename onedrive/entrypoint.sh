@@ -9,7 +9,7 @@ function info {
 }
 
 function error {
-	echo " [ ERROR ]  $1"
+	echo "[ ERROR ]  $1"
 }
 
 function init_config {
@@ -84,4 +84,8 @@ while [[ $(get_process) != "" ]]; do
 	sleep 5
 done
 
-info "no monitors alive"
+echo ""
+error "no monitors alive, exiting container in 5 minutes"
+sleep 300
+info "exiting..."
+exit 1

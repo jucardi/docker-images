@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  utorrent:
+    container_name: utorrent_nordvpn
+    build: .
+    cap_add:
+      - net_admin
+    security_opt:
+      - label:disable 
+    volumes:
+      - /dev/net:/dev/net:z
+      - $PWD/data:/utorrent/data
+      - $PWD/settings:/utorrent/settings
+    environment:
+      - USER=
+      - PASS=
+    ports:
+      - '8080:8080'
+      - '6881:6881'
